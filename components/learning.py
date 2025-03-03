@@ -112,7 +112,8 @@ def show_quiz(topic):
             st.session_state.quiz_answers[i] = st.radio(
                 f"Select answer for question {i+1}:",
                 q['options'],
-                key=f"q_{i}"
+                key=f"q_{i}",
+                index=None
             )
 
         if st.button("Submit Quiz"):
@@ -120,8 +121,10 @@ def show_quiz(topic):
             st.session_state.quiz_submitted = True
             st.session_state.quiz_score = score
             st.success(f"Quiz completed! Your score: {score}%")
+            show_correct_answers()
     else:
         st.write(f"Your score: {st.session_state.quiz_score}%")
+        show_correct_answers()
         if st.button("Try Again"):
             del st.session_state.current_quiz
             del st.session_state.quiz_answers
@@ -138,22 +141,34 @@ def calculate_quiz_score():
 
     return (correct / total) * 100
 
+def show_correct_answers():
+    st.subheader("Correct Answers")
+    for i, q in enumerate(st.session_state.current_quiz["questions"]):
+        st.write(f"**Question {i+1}:** {q['question']}")
+        st.write(f"Correct Answer: {q['correct_answer']}")
+
 def show_video_guide(topic):
     st.header(f"Video Guide: {topic}")
 
-    try:
-        video_data = json.loads(get_video_content(topic))
+    video_links = {
+        "Understanding Macronutrients": "https://www.youtube.com/embed/ISZLTJH5lYg",
+        "Importance of Vitamins and Minerals": "https://www.youtube.com/embed/dBnniua6-oM",
+        "Healthy Eating Habits": "https://www.youtube.com/embed/mMHVEFWNLMc",
+        "Cardiovascular Health": "https://www.youtube.com/embed/5eAQa4MOGkE",
+        "Strength Training Fundamentals": "https://www.youtube.com/embed/2tM1LFFxeKg",
+        "Flexibility and Mobility": "https://www.youtube.com/embed/8PaoLy7PHwk",
+        "Stress Management": "https://www.youtube.com/embed/1vx8iUvfyCY",
+        "Mindfulness Techniques": "https://www.youtube.com/embed/w6T02g5hnT4",
+        "Sleep Hygiene": "https://www.youtube.com/embed/1nZEdqcGVzo"
+    }
 
-        st.subheader(video_data["title"])
-        st.markdown(f"**Description:** {video_data['description']}")
-
-        # Embed YouTube video
-        video_id = video_data["video_id"]
+    if topic in video_links:
+        video_url = video_links[topic]
         st.markdown(f"""
         <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background-color: #F8F9FA; border-radius: 15px; margin: 20px 0;">
             <iframe 
                 style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 15px; border: none;"
-                src="https://www.youtube.com/embed/{video_id}" 
+                src="{video_url}" 
                 title="YouTube video player" 
                 frameborder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -161,20 +176,5 @@ def show_video_guide(topic):
             </iframe>
         </div>
         """, unsafe_allow_html=True)
-
-        # Key learning points
-        st.subheader("Key Learning Points")
-        for i, point in enumerate(video_data["key_points"]):
-            st.markdown(f"**{i+1}.** {point}")
-
-        # Additional resources
-        with st.expander("Additional Resources", expanded=False):
-            st.markdown("""
-            - 📚 Related reading materials
-            - 🎓 Advanced courses on this topic
-            - 👥 Community forums for discussion
-            """)
-
-    except Exception as e:
-        st.error("Unable to load video content. Please try again later.")
-        st.info("Meanwhile, you can explore our quiz section for interactive learning.")
+    else:
+        st.error("No video guide available for this topic.")

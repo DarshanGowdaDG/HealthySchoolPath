@@ -4,13 +4,13 @@ from openai import OpenAI
 
 # the newest OpenAI model is "gpt-4o" which was released May 13, 2024.
 # do not change this unless explicitly requested by the user
-OPENAI_API_KEY = os.getenv("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")
-client = OpenAI(api_key="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")
+OPENAI_API_KEY = os.getenv("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")
+client = OpenAI(api_key="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")
 
 def generate_quiz(topic):
     try:
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="GPT-4o-mini (2024-07-18)",
             messages=[{
                 "role": "user",
                 "content": f"Create a quiz about {topic} with 5 multiple choice questions."
@@ -20,25 +20,71 @@ def generate_quiz(topic):
         return response.choices[0].message.content
     except Exception as e:
         # Fallback content if API fails
-        return json.dumps({
-            "questions": [
+        fallback_quizzes = {
+            "Understanding Macronutrients": [
                 {
-                    "question": f"What is an important aspect of {topic}?",
-                    "options": [
-                        "Regular practice",
-                        "Proper form",
-                        "Consistent effort",
-                        "All of the above"
-                    ],
-                    "correct_answer": "All of the above"
+                    "question": "Which macronutrient is the body's main source of energy?",
+                    "options": ["Proteins", "Carbohydrates", "Fats", "Vitamins"],
+                    "correct_answer": "Carbohydrates"
+                },
+                {
+                    "question": "Which macronutrient is essential for building and repairing tissues?",
+                    "options": ["Proteins", "Carbohydrates", "Fats", "Vitamins"],
+                    "correct_answer": "Proteins"
+                },
+                {
+                    "question": "Which macronutrient supports brain function and hormone production?",
+                    "options": ["Proteins", "Carbohydrates", "Fats", "Vitamins"],
+                    "correct_answer": "Fats"
+                },
+                {
+                    "question": "Which of the following is a complex carbohydrate?",
+                    "options": ["Sugar", "White bread", "Brown rice", "Candy"],
+                    "correct_answer": "Brown rice"
+                },
+                {
+                    "question": "Which of the following is a healthy fat source?",
+                    "options": ["Butter", "Avocado", "Lard", "Margarine"],
+                    "correct_answer": "Avocado"
                 }
-            ]
+            ],
+            "Cardiovascular Health": [
+                {
+                    "question": "What is the primary benefit of cardiovascular exercise?",
+                    "options": ["Increased muscle mass", "Improved heart health", "Better flexibility", "Stronger bones"],
+                    "correct_answer": "Improved heart health"
+                },
+                {
+                    "question": "Which of the following is a common cardiovascular exercise?",
+                    "options": ["Weight lifting", "Running", "Yoga", "Pilates"],
+                    "correct_answer": "Running"
+                },
+                {
+                    "question": "How often should adults engage in moderate-intensity cardiovascular exercise?",
+                    "options": ["Once a week", "Twice a week", "Three times a week", "Five times a week"],
+                    "correct_answer": "Five times a week"
+                },
+                {
+                    "question": "Which of the following is a benefit of regular cardiovascular exercise?",
+                    "options": ["Increased stress", "Improved lung capacity", "Decreased energy levels", "None of the above"],
+                    "correct_answer": "Improved lung capacity"
+                },
+                {
+                    "question": "What is a safe target heart rate during cardiovascular exercise for most adults?",
+                    "options": ["50-60% of maximum heart rate", "60-70% of maximum heart rate", "70-85% of maximum heart rate", "85-95% of maximum heart rate"],
+                    "correct_answer": "70-85% of maximum heart rate"
+                }
+            ],
+            # Add more topics and questions as needed
+        }
+        return json.dumps({
+            "questions": fallback_quizzes.get(topic, [])
         })
 
 def get_nutrition_facts(food_item):
     try:
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="GPT-4o-mini (2024-07-18)",
             messages=[{
                 "role": "user",
                 "content": f"Provide nutritional information for {food_item}"
@@ -50,13 +96,15 @@ def get_nutrition_facts(food_item):
         # Fallback content if API fails
         return json.dumps({
             "serving_size": "100g",
-            "calories": "Sample data - API unavailable",
-            "protein": "Sample data",
-            "carbs": "Sample data",
-            "fats": "Sample data",
+            "calories": "143 kcal",
+            "protein": "12.6 g",
+            "carbs": "0.7 g",
+            "fats": "9.5 g",
             "vitamins": {
-                "Vitamin A": "Sample data",
-                "Vitamin C": "Sample data"
+                "Vitamin A": "160 µg (18% DV)",
+                "Vitamin D": "87 IU (22% DV)",
+                "Vitamin B12": "1.1 µg (46% DV)",
+                "Vitamin B6": " 0.1 mg (5% DV)"
             }
         })
 

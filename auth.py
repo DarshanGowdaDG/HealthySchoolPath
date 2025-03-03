@@ -109,17 +109,17 @@ def show_registration():
 # and any necessary CSS/JS for particles.js integration.
 
 #Example components/particles.py
-# import streamlit as st
+import streamlit as st
 
-# def load_particles_js():
-#     st.markdown("""
-#         <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-#         <script>
-#             particlesJS('particles-js', {
-#                 //particle.js configuration here
-#             });
-#         </script>
-#     """, unsafe_allow_html=True)
+def load_particles_js():
+    st.markdown("""
+        <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+        <script>
+            particlesJS('particles-js', {
+                //particle.js configuration here
+            });
+        </script>
+    """, unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
