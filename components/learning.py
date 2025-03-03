@@ -154,12 +154,12 @@ def show_video_guide(topic):
         "Understanding Macronutrients": "https://www.youtube.com/embed/ISZLTJH5lYg",
         "Importance of Vitamins and Minerals": "https://www.youtube.com/embed/dBnniua6-oM",
         "Healthy Eating Habits": "https://www.youtube.com/embed/mMHVEFWNLMc",
-        "Cardiovascular Health": "https://www.youtube.com/embed/5eAQa4MOGkE",
+        "Cardiovascular Health": "https://www.youtube.com/embed/bx99qQoHk5I",
         "Strength Training Fundamentals": "https://www.youtube.com/embed/2tM1LFFxeKg",
-        "Flexibility and Mobility": "https://www.youtube.com/embed/8PaoLy7PHwk",
+        "Flexibility and Mobility": "https://www.youtube.com/embed/g1pb2aK2we4&t=6s",
         "Stress Management": "https://www.youtube.com/embed/1vx8iUvfyCY",
         "Mindfulness Techniques": "https://www.youtube.com/embed/w6T02g5hnT4",
-        "Sleep Hygiene": "https://www.youtube.com/embed/1nZEdqcGVzo"
+        "Sleep Hygiene": "https://www.youtube.com/embed/IzQ2siryQrM"
     }
 
     if topic in video_links:
