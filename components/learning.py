@@ -156,7 +156,7 @@ def show_video_guide(topic):
         "Healthy Eating Habits": "https://www.youtube.com/embed/mMHVEFWNLMc",
         "Cardiovascular Health": "https://www.youtube.com/embed/bx99qQoHk5I",
         "Strength Training Fundamentals": "https://www.youtube.com/embed/2tM1LFFxeKg",
-        "Flexibility and Mobility": "https://www.youtube.com/embed/g1pb2aK2we4&t=6s",
+        "Flexibility and Mobility": "https://www.youtube.com/embed/sh4HZVbTwR0",
         "Stress Management": "https://www.youtube.com/embed/1vx8iUvfyCY",
         "Mindfulness Techniques": "https://www.youtube.com/embed/w6T02g5hnT4",
         "Sleep Hygiene": "https://www.youtube.com/embed/IzQ2siryQrM"
