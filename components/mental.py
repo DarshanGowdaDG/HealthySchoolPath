@@ -138,7 +138,7 @@ def show_focus_tracking():
             st.session_state.timer_running = True
             st.session_state.start_time = datetime.now()
             st.session_state.time_remaining = duration * 60  # Convert to seconds
-            st.rerun()
+            st.experimental_rerun()
     else:
         if st.button("Stop Study Session"):
             st.session_state.timer_running = False
@@ -153,7 +153,7 @@ def show_focus_tracking():
                     elapsed_minutes
                 )
                 st.success(f"Completed {elapsed_minutes} minute focus session!")
-            st.rerun()
+            st.experimental_rerun()
 
     # Display timer if running
     if st.session_state.timer_running:
@@ -174,7 +174,7 @@ def show_focus_tracking():
         if time_remaining > 0:
             import time
             time.sleep(1)
-            st.rerun()
+            st.experimental_rerun()
 
         # Check if timer completed
         if time_remaining <= 0:
@@ -187,7 +187,7 @@ def show_focus_tracking():
             )
             st.balloons()
             st.success(f"Completed {duration} minute focus session!")
-            st.rerun()
+            st.experimental_rerun()
 
     # Productivity tips
     st.subheader("💡 AI-Powered Productivity Tips")

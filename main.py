@@ -108,11 +108,11 @@ def show_homepage():
     with col1:
         if st.button("Login", key="home_login", help="Click to login to your account"):
             st.session_state.show_login = True
-            st.rerun()
+            st.experimental_rerun()
     with col2:
         if st.button("Register", key="home_register", help="Click to create a new account"):
             st.session_state.show_register = True
-            st.rerun()
+            st.experimental_rerun()
 
     # Feature cards
     col1, col2, col3 = st.columns(3)
@@ -121,8 +121,8 @@ def show_homepage():
         with st.container():
             st.markdown(
                 """
-                <div class="content-section hover-lift">
-                    <h3>🤖 AI-Powered Insights</h3>
+                <div class="content-section hover-lift " style=' color: #2c3e50;'>
+                    <h3 style='color: #2c3e50;'>🤖 AI-Powered Insights</h3>
                     <ul>
                         <li>Personalized recommendations</li>
                         <li>Real-time health monitoring</li>
@@ -137,8 +137,8 @@ def show_homepage():
         with st.container():
             st.markdown(
                 """
-                <div class="content-section hover-lift">
-                    <h3>🎮 Gamified Learning</h3>
+                <div class="content-section hover-lift"style='color: #2c3e50;'>
+                    <h3 style='color: #2c3e50;'>🎮 Gamified Learning</h3>
                     <ul>
                         <li>Earn achievement badges</li>
                         <li>Track your progress streaks</li>
@@ -153,8 +153,8 @@ def show_homepage():
         with st.container():
             st.markdown(
                 """
-                <div class="content-section hover-lift">
-                    <h3>📊 Comprehensive Dashboard</h3>
+                <div class="content-section hover-lift" style='color: #2c3e50;'>
+                    <h3 style='color: #2c3e50;'>📊 Comprehensive Dashboard</h3>
                     <ul>
                         <li>Physical health metrics</li>
                         <li>Mental wellness tracking</li>
@@ -220,7 +220,7 @@ def main():
         if st.button("Logout", key="logout_button"):
             st.session_state.authenticated = False
             st.session_state.username = None
-            st.rerun()
+            st.experimental_rerun()
         st.markdown('</div>', unsafe_allow_html=True)
 
     # Content routing with different backgrounds for each section
